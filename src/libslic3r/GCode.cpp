@@ -1892,8 +1892,6 @@ namespace ProcessLayer
             {
                 assert(m600_extruder_before_layer >= 0);
 		        // Color Change or Tool Change as Color Change.
-                // add tag for processor
-                gcode += ";" + GCodeProcessor::reserved_tag(GCodeProcessor::ETags::Color_Change) + ",T" + std::to_string(m600_extruder_before_layer) + "," + custom_gcode->color + "\n";
 
                 if (!single_extruder_printer && m600_extruder_before_layer >= 0 && first_extruder_id != (unsigned)m600_extruder_before_layer
                     // && !MMU1
@@ -1913,6 +1911,8 @@ namespace ProcessLayer
                     // see GH issue #6362
                     gcodegen.writer().unretract();
                 }
+                // add tag for processor
+                gcode += ";" + GCodeProcessor::reserved_tag(GCodeProcessor::ETags::Color_Change) + ",T" + std::to_string(m600_extruder_before_layer) + "," + custom_gcode->color + "\n";
 	        } 
 	        else {
 	            if (gcode_type == CustomGCode::PausePrint) // Pause print
